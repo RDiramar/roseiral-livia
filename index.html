@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#15070f">
+    <title>Roseiral para Lívia</title>
+    <link rel="preload" href="assets/images/petal.svg" as="image">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <main class="experience" aria-live="polite">
+      <section class="intro" id="intro">
+        <div class="letter" aria-label="Carta romântica">
+          <span class="seal" aria-hidden="true"></span>
+          <button class="open-button" id="openButton" type="button">
+            Clique para abrir
+          </button>
+          <p>Tenho algo especial para você</p>
+        </div>
+      </section>
+
+      <section class="garden" id="garden" aria-hidden="true">
+        <div class="sky" aria-hidden="true"></div>
+        <div class="moon-glow" aria-hidden="true"></div>
+        <div class="mist mist-one" aria-hidden="true"></div>
+        <div class="mist mist-two" aria-hidden="true"></div>
+        <div class="stars" id="stars" aria-hidden="true"></div>
+        <div class="rose-field" id="roseField" aria-hidden="true"></div>
+        <div class="petal-field" id="petalField" aria-hidden="true"></div>
+
+        <article class="parchment" id="parchment" aria-label="Mensagem especial">
+          <div class="parchment-scroll">
+            <p id="messageText"></p>
+          </div>
+        </article>
+
+        <button class="music-fallback" id="musicFallback" type="button" hidden>
+          Tocar música
+        </button>
+      </section>
+
+      <audio id="backgroundMusic" src="assets/audio/musica.mp3" preload="auto" loop></audio>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
