@@ -37,12 +37,15 @@ message: `...`
 Também é possível ajustar:
 
 ```js
-roseCount: 34,
-petalCount: 58,
-starCount: 70
+roseCount: 24,
+petalCount: 34,
+starCount: 38,
+mobileRoseCount: 14,
+mobilePetalCount: 20,
+mobileStarCount: 24
 ```
 
-Para celulares mais antigos, reduza `petalCount` e `roseCount`.
+Para celulares mais antigos, reduza `petalCount`, `roseCount`, `mobilePetalCount` e `mobileRoseCount`. O site usa automaticamente as quantidades `mobile...` em telas menores.
 
 ## Como ajustar as rosas
 

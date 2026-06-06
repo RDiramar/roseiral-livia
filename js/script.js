@@ -1,9 +1,12 @@
 const CONFIG = {
   audioPath: "assets/audio/musica.mp3",
   musicLoopAfterSeconds: 60,
-  roseCount: 34,
-  petalCount: 58,
-  starCount: 70,
+  roseCount: 24,
+  petalCount: 34,
+  starCount: 38,
+  mobileRoseCount: 14,
+  mobilePetalCount: 20,
+  mobileStarCount: 24,
   message: `Lívia, se eu tentasse te explicar a diferença que você faz na minha vida, ia faltar palavra. A verdade é que, antes de você chegar, parecia que eu tava caminhando meio sem rumo. Aí você chegou e mudou o cenário todo.
 
 Você tem uma energia que não existe igual. Meu dia pode tá foda, o mundo caindo lá fora, mas basta tu dar um sorriso ou me dar um abraço que tudo clareia. Você é a paz que eu precisava e nem sabia.
@@ -33,21 +36,35 @@ function random(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function createStars() {
-  for (let index = 0; index < CONFIG.starCount; index += 1) {
+function getVisualProfile() {
+  const isMobile = window.matchMedia("(max-width: 700px)").matches;
+
+  return {
+    roseCount: isMobile ? CONFIG.mobileRoseCount : CONFIG.roseCount,
+    petalCount: isMobile ? CONFIG.mobilePetalCount : CONFIG.petalCount,
+    starCount: isMobile ? CONFIG.mobileStarCount : CONFIG.starCount
+  };
+}
+
+function createStars(starCount) {
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < starCount; index += 1) {
     const star = document.createElement("span");
     star.style.setProperty("--x", `${random(0, 100)}vw`);
     star.style.setProperty("--y", `${random(0, 72)}vh`);
     star.style.setProperty("--size", `${random(1, 4)}px`);
     star.style.setProperty("--delay", `${random(0, 5)}s`);
     star.style.setProperty("--duration", `${random(3, 7)}s`);
-    stars.appendChild(star);
+    fragment.appendChild(star);
   }
+
+  stars.appendChild(fragment);
 }
 
-function createRose(index) {
+function createRose(index, roseCount) {
   const rose = document.createElement("div");
-  const depth = index / CONFIG.roseCount;
+  const depth = index / roseCount;
   const scale = random(0.58, 1.55) + depth * 0.75;
   const left = random(-4, 101);
   const bottom = random(-12, 20) + depth * 7;
@@ -104,15 +121,22 @@ function createPetal() {
 function buildGarden() {
   if (roseField.children.length || petalField.children.length) return;
 
-  createStars();
+  const profile = getVisualProfile();
+  const roses = document.createDocumentFragment();
+  const petals = document.createDocumentFragment();
 
-  for (let index = 0; index < CONFIG.roseCount; index += 1) {
-    roseField.appendChild(createRose(index));
+  createStars(profile.starCount);
+
+  for (let index = 0; index < profile.roseCount; index += 1) {
+    roses.appendChild(createRose(index, profile.roseCount));
   }
 
-  for (let index = 0; index < CONFIG.petalCount; index += 1) {
-    petalField.appendChild(createPetal());
+  for (let index = 0; index < profile.petalCount; index += 1) {
+    petals.appendChild(createPetal());
   }
+
+  roseField.appendChild(roses);
+  petalField.appendChild(petals);
 }
 
 function showMusicFallback() {
@@ -136,8 +160,6 @@ function enforceAudioLoopWindow() {
     music.currentTime = 0;
     music.play().catch(showMusicFallback);
   }
-
-  requestAnimationFrame(enforceAudioLoopWindow);
 }
 
 function startExperience() {
@@ -155,8 +177,8 @@ function startExperience() {
   }, 850);
 
   playMusic();
-  enforceAudioLoopWindow();
 }
 
 openButton.addEventListener("click", startExperience);
 musicFallback.addEventListener("click", playMusic);
+music.addEventListener("timeupdate", enforceAudioLoopWindow);

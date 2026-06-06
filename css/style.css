@@ -152,6 +152,7 @@ button {
   opacity: 0;
   transform: scale(1.03);
   transition: opacity 1.1s ease, transform 1.3s ease;
+  contain: layout paint;
 }
 
 .garden.is-active {
@@ -199,7 +200,7 @@ button {
   height: 34vh;
   bottom: -6vh;
   background: radial-gradient(ellipse, rgba(255, 216, 205, .13), transparent 64%);
-  filter: blur(20px);
+  filter: blur(12px);
   animation: mistMove 18s ease-in-out infinite alternate;
 }
 
@@ -229,7 +230,7 @@ button {
     scale(var(--scale));
   transform-origin: 50% 100%;
   animation: bloomIn 1.8s cubic-bezier(.2, .9, .25, 1.1) var(--delay) both, roseSway 5.8s ease-in-out var(--delay) infinite;
-  filter: drop-shadow(0 18px 16px rgba(0, 0, 0, .35));
+  filter: drop-shadow(0 10px 9px rgba(0, 0, 0, .28));
 }
 
 .rose-stem {
@@ -271,8 +272,8 @@ button {
   transform-origin: 50% 82%;
   box-shadow:
     inset 2px 5px 8px rgba(255, 236, 229, .18),
-    inset -7px -12px 14px rgba(42, 0, 15, .34),
-    0 7px 10px rgba(45, 0, 14, .22);
+    inset -5px -8px 10px rgba(42, 0, 15, .3),
+    0 4px 6px rgba(45, 0, 14, .18);
 }
 
 .petal-layer::after {
@@ -396,7 +397,7 @@ button {
   transform: translateZ(var(--depth));
   animation: petalFly var(--duration) linear var(--delay) infinite;
   will-change: transform;
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .25));
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, .2));
 }
 
 .parchment {
@@ -542,6 +543,24 @@ button {
 }
 
 @media (max-width: 700px) {
+  .intro.is-closing {
+    filter: blur(3px);
+  }
+
+  .moon-glow {
+    animation: none;
+    opacity: .75;
+  }
+
+  .stars span {
+    box-shadow: none;
+  }
+
+  .mist {
+    filter: blur(8px);
+    opacity: .72;
+  }
+
   .letter p {
     font-size: .95rem;
   }
@@ -549,6 +568,7 @@ button {
   .rose {
     width: 48px;
     height: 138px;
+    filter: none;
   }
 
   .rose-stem {
@@ -564,6 +584,9 @@ button {
   .petal-layer {
     width: 31px;
     height: 40px;
+    box-shadow:
+      inset 1px 4px 6px rgba(255, 236, 229, .16),
+      inset -4px -7px 8px rgba(42, 0, 15, .28);
   }
 
   .petal-a,
@@ -586,6 +609,12 @@ button {
   .rose-core {
     width: 18px;
     height: 22px;
+    box-shadow: inset 0 -5px 7px rgba(22, 0, 9, .4);
+  }
+
+  .petal {
+    filter: none;
+    opacity: .82;
   }
 
   .parchment {
